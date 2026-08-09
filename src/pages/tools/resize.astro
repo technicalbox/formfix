@@ -171,13 +171,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </script>
 
 <style>
-  .tool-header { margin-bottom: var(--space-8); }
+  .tool-header { margin-bottom: clamp(1.25rem, 3vw, 2rem); }
   .tool-header h1 { margin-bottom: var(--space-2); }
-  .tool-header p { color: var(--color-text-secondary); }
-  .controls-title { font-size: var(--text-sm); font-weight: var(--font-semibold); text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-secondary); margin-bottom: var(--space-4); }
-  .dim-inputs { display: flex; align-items: flex-end; gap: var(--space-3); margin-bottom: var(--space-3); }
-  .dim-field { flex: 1; }
-  .dim-x { font-size: var(--text-lg); color: var(--color-text-tertiary); padding-bottom: var(--space-3); }
-  .checkbox-row { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); cursor: pointer; }
-  .checkbox-row input { width: 18px; height: 18px; accent-color: var(--color-primary-600); }
+  .tool-header p { color: var(--color-text-secondary); font-size: clamp(0.875rem, 1.5vw + 0.4rem, 1rem); }
+  .controls-title { font-size: var(--text-xs); font-weight: var(--font-bold); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); margin-bottom: var(--space-3); }
+  .dim-inputs { display: flex; align-items: flex-end; gap: var(--space-2); margin-bottom: var(--space-3); width: 100%; }
+  .dim-field { flex: 1; min-width: 0; }
+  .dim-x { font-size: var(--text-base); color: var(--color-text-tertiary); padding-bottom: var(--space-2-5); flex-shrink: 0; }
+  .checkbox-row { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); cursor: pointer; min-height: 44px; user-select: none; }
+  .checkbox-row input { width: 20px; height: 20px; accent-color: var(--color-primary-600); flex-shrink: 0; }
 </style>
