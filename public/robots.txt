@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://www.formfix.me/sitemap.xml
+Sitemap: https://www.formfix.me/sitemap-index.xml
