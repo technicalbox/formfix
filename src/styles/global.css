@@ -783,13 +783,18 @@ select.input {
   color: var(--color-warning-600);
 }
 
+/* ---------- Hidden Attribute Fix ---------- */
+[hidden] {
+  display: none !important;
+}
+
 /* ---------- Responsive Utilities ---------- */
 .desktop-only {
   display: none !important;
 }
 
 .mobile-only {
-  display: flex !important;
+  display: flex;
 }
 
 @media (min-width: 768px) {

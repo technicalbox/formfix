@@ -153,15 +153,25 @@ import '../styles/global.css';
       function setMenuState(open: boolean) {
         if (!toggle || !nav) return;
         toggle.setAttribute('aria-expanded', String(open));
-        nav.hidden = !open;
+        if (open) {
+          nav.removeAttribute('hidden');
+        } else {
+          nav.setAttribute('hidden', '');
+        }
         if (iconHamburger && iconClose) {
-          iconHamburger.toggleAttribute('hidden', open);
-          iconClose.toggleAttribute('hidden', !open);
+          if (open) {
+            iconHamburger.setAttribute('hidden', '');
+            iconClose.removeAttribute('hidden');
+          } else {
+            iconHamburger.removeAttribute('hidden');
+            iconClose.setAttribute('hidden', '');
+          }
         }
       }
 
       if (toggle && nav) {
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
           const expanded = toggle.getAttribute('aria-expanded') === 'true';
           setMenuState(!expanded);
         });
@@ -171,6 +181,21 @@ import '../styles/global.css';
           if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
             setMenuState(false);
           }
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+          const target = e.target as Node;
+          if (toggle.getAttribute('aria-expanded') === 'true' && !nav.contains(target) && !toggle.contains(target)) {
+            setMenuState(false);
+          }
+        });
+
+        // Close when clicking a nav link
+        nav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            setMenuState(false);
+          });
         });
       }
     </script>
@@ -270,6 +295,10 @@ import '../styles/global.css';
     left: 0;
     right: 0;
     z-index: var(--z-dropdown);
+  }
+
+  .mobile-nav[hidden] {
+    display: none !important;
   }
 
   .mobile-nav-group {
