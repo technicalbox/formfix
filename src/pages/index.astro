@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
 import presetData from '../data/presets.json';
 
 const structuredData = {
@@ -164,6 +165,9 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Ad Slot A — Between Tools and Exam Presets -->
+  <AdSlot slotId="home-a" format="horizontal" />
+
   <!-- Exam Presets -->
   <section class="section" id="exam-presets" aria-labelledby="exams-heading">
     <div class="container">
@@ -207,6 +211,9 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Ad Slot B — Between How It Works and Privacy -->
+  <AdSlot slotId="home-b" format="responsive" />
+
   <!-- Privacy -->
   <section class="section privacy-section" aria-labelledby="privacy-heading">
     <div class="container">
@@ -234,6 +241,9 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <!-- Ad Slot C — Between Quick Compress and FAQ -->
+  <AdSlot slotId="home-c" format="horizontal" />
 
   <!-- FAQ -->
   <section class="section" aria-labelledby="faq-heading">

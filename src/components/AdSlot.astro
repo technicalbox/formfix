@@ -1,0 +1,154 @@
+---
+/**
+ * AdSlot — AdSense-Ready Ad Placement Component
+ *
+ * Renders a clearly labeled, responsive ad container.
+ * No external ad scripts are loaded — this is a layout-only placeholder
+ * designed for future Google AdSense integration.
+ *
+ * Usage:
+ *   <AdSlot slotId="home-a" format="horizontal" />
+ *   <AdSlot slotId="tool-bottom" format="rectangle" />
+ *
+ * When AdSense is approved, replace the inner placeholder with the
+ * actual <ins class="adsbygoogle"> tag. No page layout changes needed.
+ */
+
+interface Props {
+  /** Unique slot identifier for this ad placement (e.g. "home-a", "tool-bottom") */
+  slotId: string;
+  /** Layout hint: "horizontal" (banner), "rectangle" (in-content), "responsive" (auto) */
+  format?: 'horizontal' | 'rectangle' | 'responsive';
+  /** Optional extra CSS class */
+  class?: string;
+}
+
+const { slotId, format = 'responsive', class: className } = Astro.props;
+---
+
+<aside
+  class:list={['ad-slot', `ad-slot--${format}`, className]}
+  data-ad-slot={slotId}
+  aria-label="Advertisement"
+  role="complementary"
+>
+  <div class="ad-slot__inner">
+    <!--
+      ADSENSE PLACEHOLDER
+      Replace this comment block with the actual Google AdSense <ins> tag
+      after approval. Example:
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+  </div>
+</aside>
+
+<style>
+  /* ── Ad Slot Container ── */
+  .ad-slot {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--content-padding);
+  }
+
+  .ad-slot__inner {
+    position: relative;
+    width: 100%;
+    border: 1px dashed var(--color-gray-200);
+    border-radius: var(--radius-md);
+    background-color: var(--color-gray-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Minimum reserved height to reduce layout shift when real ads load */
+    min-height: 90px;
+  }
+
+  /* "Advertisement" label — clear, subtle, AdSense-compliant */
+  .ad-slot__inner::before {
+    content: 'Advertisement';
+    position: absolute;
+    top: var(--space-1-5);
+    left: var(--space-2-5);
+    font-size: 0.6875rem; /* 11px */
+    font-weight: var(--font-medium);
+    color: var(--color-gray-400);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    pointer-events: none;
+    line-height: 1;
+    z-index: 1;
+  }
+
+  /* ── Format variants ── */
+
+  /* Horizontal banner — typically leaderboard-style */
+  .ad-slot--horizontal .ad-slot__inner {
+    min-height: 90px;
+    max-height: 120px;
+  }
+
+  /* Rectangle — in-content medium rectangle */
+  .ad-slot--rectangle .ad-slot__inner {
+    min-height: 250px;
+    max-width: 336px;
+    margin-inline: auto;
+  }
+
+  /* Responsive — auto adapts to container width */
+  .ad-slot--responsive .ad-slot__inner {
+    min-height: 100px;
+  }
+
+  /* ── Visual separation — spacing above and below ── */
+  .ad-slot {
+    margin-block: var(--space-8);
+  }
+
+  /* ── Mobile adjustments ── */
+  @media (max-width: 767px) {
+    .ad-slot {
+      margin-block: var(--space-6);
+    }
+
+    .ad-slot--horizontal .ad-slot__inner {
+      min-height: 50px;
+      max-height: 100px;
+    }
+
+    .ad-slot--rectangle .ad-slot__inner {
+      min-height: 200px;
+      max-width: 100%;
+    }
+
+    .ad-slot--responsive .ad-slot__inner {
+      min-height: 80px;
+    }
+  }
+
+  /* ── When real ads are injected, hide the dashed placeholder styling ── */
+  .ad-slot__inner:has(ins.adsbygoogle) {
+    border: none;
+    background-color: transparent;
+    min-height: auto;
+  }
+
+  .ad-slot__inner:has(ins.adsbygoogle)::before {
+    /* Keep "Advertisement" label visible per AdSense policy */
+  }
+
+  /* ── Prevent ad container from creating horizontal overflow ── */
+  .ad-slot,
+  .ad-slot__inner {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+</style>

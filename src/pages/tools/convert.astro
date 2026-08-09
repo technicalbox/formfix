@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../../components/AdSlot.astro';
 ---
 
 <BaseLayout
@@ -60,6 +61,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <!-- Ad Slot — Below tool content, above footer -->
+  <AdSlot slotId="tool-convert" format="responsive" />
+
 </BaseLayout>
 
 <script>

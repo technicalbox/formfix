@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
 import presetData from '../data/presets.json';
 
 export function getStaticPaths() {
@@ -192,6 +193,9 @@ const relatedPresets = type === 'preset' && preset?.relatedPresets
             </div>
           )}
 
+          {/* Ad Slot — After guidelines, before related tools */}
+          <AdSlot slotId="preset-bottom" format="responsive" />
+
           {/* Related */}
           {relatedPresets.length > 0 && (
             <div class="related-section">
@@ -275,6 +279,9 @@ const relatedPresets = type === 'preset' && preset?.relatedPresets
               </ul>
             </div>
           )}
+
+          {/* Ad Slot — After common uses, before other targets */}
+          <AdSlot slotId="compress-target-bottom" format="responsive" />
 
           <div class="other-targets">
             <h2>Other Compression Targets</h2>

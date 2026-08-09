@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../../components/AdSlot.astro';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -150,6 +151,9 @@ const structuredData = {
       </p>
     </div>
   </section>
+
+  <!-- Ad Slot — Below tool content, above footer -->
+  <AdSlot slotId="tool-compress" format="responsive" />
 
 </BaseLayout>
 
