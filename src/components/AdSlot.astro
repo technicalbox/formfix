@@ -145,10 +145,12 @@ const { slotId, format = 'responsive', class: className } = Astro.props;
     /* Keep "Advertisement" label visible per AdSense policy */
   }
 
-  /* ── Prevent ad container from creating horizontal overflow ── */
-  .ad-slot,
+  /* ── Defensive safeguard against unexpected ad content overflow ── */
+  .ad-slot {
+    overflow-x: hidden;
+  }
+
   .ad-slot__inner {
-    max-width: 100%;
     overflow-x: hidden;
   }
 </style>
