@@ -1,17 +1,475 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import presetData from '../data/presets.json';
 
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'FormFix',
+  description: 'Resize, crop, compress and validate photos, signatures and documents for Indian exam and government application forms — directly in your browser.',
+  applicationCategory: 'UtilityApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+  browserRequirements: 'Requires a modern web browser with JavaScript enabled',
+};
+
+const examPresets = presetData.presets;
+const compressionTargets = presetData.compressionTargets;
+
+const tools = [
+  {
+    title: 'Resize Image',
+    description: 'Resize to exact pixel dimensions required by application portals.',
+    href: '/tools/resize',
+    icon: 'resize',
+  },
+  {
+    title: 'Crop Image',
+    description: 'Crop to the correct aspect ratio with drag, zoom, and pan.',
+    href: '/tools/crop',
+    icon: 'crop',
+  },
+  {
+    title: 'Compress Image',
+    description: 'Compress to ≤ target KB without destroying quality.',
+    href: '/tools/compress',
+    icon: 'compress',
+  },
+  {
+    title: 'Convert Format',
+    description: 'Convert between JPG, PNG, and WebP formats.',
+    href: '/tools/convert',
+    icon: 'convert',
+  },
+];
+
+const steps = [
+  { number: '1', title: 'Upload', description: 'Drop your photo or signature, or pick an exam preset.' },
+  { number: '2', title: 'Fix', description: 'Auto-resize, crop, and compress to meet portal requirements.' },
+  { number: '3', title: 'Download', description: 'Download the compliant file. Upload it to your application.' },
+];
+
+const faqs = [
+  {
+    q: 'Are my files uploaded to a server?',
+    a: 'No. All processing happens directly in your browser using your device\'s processor. Your files never leave your device — they are not sent to any server.',
+  },
+  {
+    q: 'What file formats are supported?',
+    a: 'FormFix currently supports JPG/JPEG, PNG, and WebP images. Most Indian exam portals require JPG format, which FormFix can convert to automatically.',
+  },
+  {
+    q: 'How does the compression work?',
+    a: 'FormFix uses a binary search algorithm to find the optimal compression quality that keeps your file under the target size (e.g., ≤ 50 KB) while maintaining the best possible image quality.',
+  },
+  {
+    q: 'Are the exam requirements accurate?',
+    a: 'Requirements are researched from official government and exam body websites. However, requirements can change between notification years. Always verify against the current official notification for your specific exam.',
+  },
+  {
+    q: 'Does it work on mobile?',
+    a: 'Yes. FormFix is designed mobile-first. The full upload → crop → compress → download workflow works on Android Chrome and iOS Safari. You can even use your phone camera to capture photos directly.',
+  },
+  {
+    q: 'Is FormFix free?',
+    a: 'Yes. FormFix is completely free to use. There are no hidden charges, no sign-up required, and no limits on the number of files you can process.',
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="FormFix — Fix Photos, Signatures & Documents for Application Forms"
+  description="Resize, crop, compress and validate photos, signatures and documents for Indian exam and government application forms — directly in your browser. Free, instant, private."
+  structuredData={structuredData}
+>
+
+  <!-- Hero — Persuade mode -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-heading">Fix Your Application Files</h1>
+      <p class="hero-sub">
+        Resize, crop, compress and validate photos, signatures and documents for exam and government application forms — directly in your browser.
+      </p>
+
+      <div class="hero-actions">
+        <a href="/tools/compress" class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Upload & Fix
+        </a>
+        <a href="#exam-presets" class="btn btn-secondary btn-lg">
+          Choose Exam Preset
+        </a>
+      </div>
+
+      <div class="hero-privacy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        Files never leave your browser
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Grid -->
+  <section class="section" aria-labelledby="tools-heading">
+    <div class="container">
+      <h2 id="tools-heading" class="section-heading">Tools</h2>
+      <div class="tools-grid">
+        {tools.map((tool) => (
+          <a href={tool.href} class="card card-interactive tool-card">
+            <div class="tool-icon" data-icon={tool.icon}>
+              {tool.icon === 'resize' && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"/>
+                  <polyline points="9 21 3 21 3 15"/>
+                  <line x1="21" y1="3" x2="14" y2="10"/>
+                  <line x1="3" y1="21" x2="10" y2="14"/>
+                </svg>
+              )}
+              {tool.icon === 'crop' && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2v14a2 2 0 0 0 2 2h14"/>
+                  <path d="M18 22V8a2 2 0 0 0-2-2H2"/>
+                </svg>
+              )}
+              {tool.icon === 'compress' && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v8l4-4"/>
+                  <path d="M12 10L8 6"/>
+                  <path d="M12 22v-8l4 4"/>
+                  <path d="M12 14l-4 4"/>
+                  <path d="M2 12h20"/>
+                </svg>
+              )}
+              {tool.icon === 'convert' && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 3 21 3 21 8"/>
+                  <line x1="4" y1="20" x2="21" y2="3"/>
+                  <polyline points="21 16 21 21 16 21"/>
+                  <line x1="15" y1="15" x2="21" y2="21"/>
+                  <line x1="4" y1="4" x2="9" y2="9"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="tool-title">{tool.title}</h3>
+            <p class="tool-desc">{tool.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Exam Presets -->
+  <section class="section" id="exam-presets" aria-labelledby="exams-heading">
+    <div class="container">
+      <h2 id="exams-heading" class="section-heading">Exam Presets</h2>
+      <p class="section-sub">Select your exam to auto-apply official photo and signature requirements.</p>
+      <div class="preset-grid">
+        {examPresets.map((preset) => (
+          <a href={`/${preset.slug}`} class="card card-interactive preset-card">
+            <div class="preset-header">
+              <span class="badge badge-info">{preset.type}</span>
+            </div>
+            <h3 class="preset-exam">{preset.exam}</h3>
+            <p class="preset-type">{preset.displayName}</p>
+            {preset.requirements.fileSize.max && (
+              <p class="preset-spec">
+                ≤ {preset.requirements.fileSize.max} KB
+                {preset.requirements.dimensions?.width && (
+                  <> · {preset.requirements.dimensions.width}×{preset.requirements.dimensions.height}px</>
+                )}
+              </p>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section" aria-labelledby="how-heading">
+    <div class="container">
+      <h2 id="how-heading" class="section-heading">How It Works</h2>
+      <div class="steps-grid">
+        {steps.map((step) => (
+          <div class="step">
+            <div class="step-number">{step.number}</div>
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-desc">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section class="section privacy-section" aria-labelledby="privacy-heading">
+    <div class="container">
+      <div class="privacy-card">
+        <svg class="privacy-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-success-600)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+        <h2 id="privacy-heading">Your files stay on your device</h2>
+        <p>FormFix processes everything using your browser's built-in image capabilities. Photos, signatures, and documents are never uploaded to any server. No account needed. No data collected.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compression shortcuts -->
+  <section class="section" aria-labelledby="compress-heading">
+    <div class="container">
+      <h2 id="compress-heading" class="section-heading">Quick Compress</h2>
+      <div class="compress-grid">
+        {compressionTargets.map((ct) => (
+          <a href={`/${ct.slug}`} class="btn btn-secondary compress-btn">
+            Compress to ≤ {ct.targetKB} KB
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="container faq-container">
+      <h2 id="faq-heading" class="section-heading">Frequently Asked Questions</h2>
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary>{faq.q}</summary>
+          <div class="faq-answer">{faq.a}</div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Hero — Persuade mode for this section */
+  .hero {
+    padding: var(--space-16) 0 var(--space-12);
+    text-align: center;
+    background: linear-gradient(
+      180deg,
+      hsl(218, 60%, 98%) 0%,
+      hsl(0, 0%, 100%) 100%
+    );
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero-inner {
+    max-width: 640px;
+  }
+
+  .hero-heading {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-5);
+  }
+
+  .hero-sub {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+    max-width: none;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-privacy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+  }
+
+  /* Section headings */
+  .section-heading {
+    margin-bottom: var(--space-2);
+  }
+
+  .section-sub {
+    color: var(--color-text-secondary);
+    font-size: var(--text-base);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Tools grid */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .tool-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .tool-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-600);
+    border-radius: var(--radius-md);
+  }
+
+  .tool-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+  }
+
+  .tool-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  /* Preset grid */
+  .preset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .preset-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .preset-header {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .preset-exam {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+  }
+
+  .preset-type {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .preset-spec {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    font-family: var(--font-mono);
+  }
+
+  /* Steps */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .step {
+    text-align: center;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary-600);
+    color: var(--color-text-inverse);
+    border-radius: 50%;
+    font-size: var(--text-base);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-3);
+  }
+
+  .step-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-2);
+  }
+
+  .step-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    max-width: none;
+  }
+
+  /* Privacy */
+  .privacy-card {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: var(--space-10);
+    background-color: var(--color-success-50);
+    border-radius: var(--radius-lg);
+  }
+
+  .privacy-icon {
+    margin-bottom: var(--space-4);
+  }
+
+  .privacy-card h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .privacy-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    max-width: none;
+  }
+
+  /* Compress shortcuts */
+  .compress-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .compress-btn {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  /* FAQ */
+  .faq-container {
+    max-width: 720px;
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding: var(--space-24) 0 var(--space-16);
+    }
+
+    .hero-heading {
+      font-size: 2.5rem;
+    }
+  }
+</style>

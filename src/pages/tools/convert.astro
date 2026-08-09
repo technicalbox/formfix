@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Convert Image Format — JPG, PNG, WebP | FormFix"
+  description="Convert images between JPG, PNG, and WebP formats. Free format converter — processed entirely in your browser."
+>
+  <section class="section">
+    <div class="container">
+      <div class="tool-header">
+        <h1>Convert Image Format</h1>
+        <p>Convert between JPG, PNG, and WebP formats. Most exam portals require JPG — convert your PNG or WebP file in one click.</p>
+      </div>
+
+      <div id="convert-app">
+        <div id="upload-area" class="upload-zone" role="button" tabindex="0" aria-label="Upload image">
+          <svg class="upload-zone-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <span class="upload-zone-text">Drop image here or click to upload</span>
+          <span class="upload-zone-hint">JPG, PNG, or WebP · Max 25 MB</span>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden />
+        </div>
+
+        <div id="workspace" class="workspace" hidden>
+          <div class="workspace-preview">
+            <img id="preview-img" alt="Image preview" />
+          </div>
+          <div class="workspace-controls">
+            <div class="card">
+              <h3 class="controls-title">Original</h3>
+              <dl class="file-info">
+                <dt>Format</dt><dd id="orig-format">—</dd>
+                <dt>Size</dt><dd id="orig-size">—</dd>
+              </dl>
+            </div>
+            <div class="card">
+              <h3 class="controls-title">Convert To</h3>
+              <div class="format-options" id="format-options">
+                <button class="btn btn-secondary format-btn" data-format="image/jpeg">JPG</button>
+                <button class="btn btn-secondary format-btn" data-format="image/png">PNG</button>
+                <button class="btn btn-secondary format-btn" data-format="image/webp">WebP</button>
+              </div>
+            </div>
+            <div id="result-panel" class="card" hidden>
+              <h3 class="controls-title">Result</h3>
+              <dl class="file-info">
+                <dt>Format</dt><dd id="res-format">—</dd>
+                <dt>Size</dt><dd id="res-size">—</dd>
+              </dl>
+              <button id="download-btn" class="btn btn-success" style="width:100%;margin-top:var(--space-3)">Download</button>
+            </div>
+            <button id="new-file-btn" class="btn btn-ghost" style="width:100%" hidden>Process Another File</button>
+          </div>
+        </div>
+        <div id="error-panel" class="alert alert-error" role="alert" hidden></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { validateFile, convertFormat, getImageMetadata, createPreviewURL, downloadFile, getExtension } from '../../lib/image-engine.js';
+
+  const uploadArea = document.getElementById('upload-area');
+  const fileInput = document.getElementById('file-input');
+  const workspace = document.getElementById('workspace');
+  const previewImg = document.getElementById('preview-img');
+  const downloadBtn = document.getElementById('download-btn');
+  const newFileBtn = document.getElementById('new-file-btn');
+  const resultPanel = document.getElementById('result-panel');
+  const errorPanel = document.getElementById('error-panel');
+
+  let currentFile = null;
+  let resultBlob = null;
+  let previewURL = null;
+
+  uploadArea?.addEventListener('click', () => fileInput?.click());
+  uploadArea?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput?.click(); } });
+  uploadArea?.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+  uploadArea?.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+  uploadArea?.addEventListener('drop', (e) => { e.preventDefault(); uploadArea.classList.remove('drag-over'); if (e.dataTransfer?.files[0]) handleFile(e.dataTransfer.files[0]); });
+  fileInput?.addEventListener('change', (e) => { if (e.target.files?.[0]) handleFile(e.target.files[0]); });
+
+  document.querySelectorAll('.format-btn').forEach(btn => {
+    btn.addEventListener('click', () => handleConvert(btn.dataset.format));
+  });
+
+  downloadBtn?.addEventListener('click', () => {
+    if (resultBlob && currentFile) {
+      const ext = getExtension(resultBlob.type);
+      downloadFile(resultBlob, `${currentFile.name.replace(/\.[^.]+$/, '')}_converted.${ext}`);
+    }
+  });
+  newFileBtn?.addEventListener('click', resetUI);
+
+  async function handleFile(file) {
+    errorPanel.hidden = true;
+    const v = await validateFile(file);
+    if (!v.valid) { errorPanel.hidden = false; errorPanel.textContent = v.errors.join(' '); return; }
+    currentFile = file;
+    if (previewURL) URL.revokeObjectURL(previewURL);
+    previewURL = createPreviewURL(file);
+    previewImg.src = previewURL;
+    const meta = await getImageMetadata(file);
+    document.getElementById('orig-format').textContent = file.type.replace('image/', '').toUpperCase();
+    document.getElementById('orig-size').textContent = `${meta.sizeKB} KB`;
+    uploadArea.hidden = true; workspace.hidden = false;
+    resultPanel.hidden = true; newFileBtn.hidden = true;
+    // Disable the button for the current format
+    document.querySelectorAll('.format-btn').forEach(b => {
+      b.disabled = b.dataset.format === file.type;
+      b.classList.toggle('btn-primary', false);
+      b.classList.toggle('btn-secondary', true);
+    });
+  }
+
+  async function handleConvert(format) {
+    if (!currentFile) return;
+    document.querySelectorAll('.format-btn').forEach(b => b.disabled = true);
+    try {
+      const result = await convertFormat(currentFile, format);
+      resultBlob = result.blob;
+      if (previewURL) URL.revokeObjectURL(previewURL);
+      previewURL = createPreviewURL(result.blob);
+      previewImg.src = previewURL;
+      document.getElementById('res-format').textContent = format.replace('image/', '').toUpperCase();
+      document.getElementById('res-size').textContent = `${result.sizeKB} KB`;
+      resultPanel.hidden = false; newFileBtn.hidden = false;
+    } catch (err) { errorPanel.hidden = false; errorPanel.textContent = err.message; }
+    finally { document.querySelectorAll('.format-btn').forEach(b => b.disabled = b.dataset.format === currentFile?.type); }
+  }
+
+  function resetUI() {
+    currentFile = null; resultBlob = null;
+    if (previewURL) { URL.revokeObjectURL(previewURL); previewURL = null; }
+    uploadArea.hidden = false; workspace.hidden = true;
+    resultPanel.hidden = true; newFileBtn.hidden = true;
+    errorPanel.hidden = true; fileInput.value = '';
+  }
+</script>
+
+<style>
+  .tool-header { margin-bottom: var(--space-8); }
+  .tool-header h1 { margin-bottom: var(--space-2); }
+  .tool-header p { color: var(--color-text-secondary); }
+  .controls-title { font-size: var(--text-sm); font-weight: var(--font-semibold); text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-secondary); margin-bottom: var(--space-4); }
+  .format-options { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .format-btn { flex: 1; min-width: 80px; font-family: var(--font-mono); font-weight: var(--font-bold); }
+</style>

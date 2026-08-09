@@ -12,6 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.2.0"
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.2.0",
+    "cropperjs": "^2.1.1",
+    "pica": "^10.0.2"
   }
 }

@@ -1,0 +1,451 @@
+{
+  "presets": [
+    {
+      "id": "ibps-photo",
+      "exam": "IBPS PO / Clerk",
+      "organization": "Institute of Banking Personnel Selection",
+      "type": "photo",
+      "displayName": "IBPS Photo Resizer",
+      "description": "Resize and compress your photo for IBPS PO, Clerk, and SO applications to meet official requirements.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": 200,
+          "height": 230,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": "200:230"
+        },
+        "fileSize": { "min": 20, "max": 50, "unit": "KB" }
+      },
+      "guidelines": [
+        "Recent passport-style color photograph",
+        "Light-colored or white background",
+        "Face should be clearly visible with neutral expression",
+        "No caps, hats, or dark glasses",
+        "Religious headwear permitted if face is fully visible"
+      ],
+      "source": {
+        "url": "https://ibps.in",
+        "document": "IBPS CRP Notification",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "Requirements apply to IBPS PO, Clerk, SO, and RRB PO/Clerk exams conducted by IBPS.",
+      "slug": "ibps-photo-resizer",
+      "relatedPresets": ["ibps-signature"]
+    },
+    {
+      "id": "ibps-signature",
+      "exam": "IBPS PO / Clerk",
+      "organization": "Institute of Banking Personnel Selection",
+      "type": "signature",
+      "displayName": "IBPS Signature Resizer",
+      "description": "Crop and compress your signature for IBPS applications to meet official 140×60 pixel requirements.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": 140,
+          "height": 60,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": "140:60"
+        },
+        "fileSize": { "min": 10, "max": 20, "unit": "KB" }
+      },
+      "guidelines": [
+        "Sign on plain white paper using black ink pen",
+        "Do NOT use capital letters",
+        "Ensure the signature is clear and not smudged",
+        "Crop tightly around the signature"
+      ],
+      "source": {
+        "url": "https://ibps.in",
+        "document": "IBPS CRP Notification",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": null,
+      "slug": "ibps-signature-resizer",
+      "relatedPresets": ["ibps-photo"]
+    },
+    {
+      "id": "ssc-signature",
+      "exam": "SSC CGL / CHSL / GD",
+      "organization": "Staff Selection Commission",
+      "type": "signature",
+      "displayName": "SSC Signature Resizer",
+      "description": "Crop and compress your signature for SSC CGL, CHSL, and GD applications.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 10, "max": 20, "unit": "KB" }
+      },
+      "guidelines": [
+        "Sign on plain white paper using black ink pen",
+        "Signature should be clear and legible",
+        "Do NOT sign in all capital letters",
+        "Avoid miniature or blurry signatures",
+        "Approximate dimensions: 4.0 cm × 2.0 cm"
+      ],
+      "source": {
+        "url": "https://ssc.gov.in",
+        "document": "SSC CGL 2026 Notice of Examination",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "SSC CGL 2026 uses live photo capture for the primary photograph. Signature still requires file upload. Requirements apply to CGL, CHSL, GD, JE, and other SSC exams.",
+      "slug": "ssc-signature-resizer",
+      "relatedPresets": []
+    },
+    {
+      "id": "upsc-photo",
+      "exam": "UPSC CSE",
+      "organization": "Union Public Service Commission",
+      "type": "photo",
+      "displayName": "UPSC Photo Resizer",
+      "description": "Resize your photo for UPSC Civil Services application to meet official requirements.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": 350,
+          "minHeight": 350,
+          "maxWidth": 1000,
+          "maxHeight": 1000,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 20, "max": 300, "unit": "KB" }
+      },
+      "guidelines": [
+        "Recent color photograph on white background",
+        "Face should cover approximately 75% of the photograph",
+        "Both ears should be visible",
+        "No caps, dark glasses, or head coverings (religious wear permitted)",
+        "Clear, sharp, well-lit image"
+      ],
+      "source": {
+        "url": "https://upsc.gov.in",
+        "document": "UPSC CSE Notification",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "Live photograph capture is also required during the application process.",
+      "slug": "upsc-photo-resizer",
+      "relatedPresets": ["upsc-signature"]
+    },
+    {
+      "id": "upsc-signature",
+      "exam": "UPSC CSE",
+      "organization": "Union Public Service Commission",
+      "type": "signature",
+      "displayName": "UPSC Signature Resizer",
+      "description": "Prepare your triple signature image for UPSC Civil Services application.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": 350,
+          "minHeight": 350,
+          "maxWidth": 1000,
+          "maxHeight": 1000,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 20, "max": 100, "unit": "KB" }
+      },
+      "guidelines": [
+        "Sign THREE times vertically on a single sheet of plain white paper",
+        "Use black ink (ballpoint or gel pen)",
+        "Ensure adequate spacing between each signature",
+        "Scan all three signatures together as a single image",
+        "Image must be clear, sharp, and well-lit"
+      ],
+      "source": {
+        "url": "https://upsc.gov.in",
+        "document": "UPSC CSE Notification",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "UPSC requires a unique 'triple signature' format — three identical signatures stacked vertically.",
+      "slug": "upsc-signature-resizer",
+      "relatedPresets": ["upsc-photo"]
+    },
+    {
+      "id": "neet-photo",
+      "exam": "NEET UG",
+      "organization": "National Testing Agency",
+      "type": "photo",
+      "displayName": "NEET Photo Resizer",
+      "description": "Resize and compress your photo for NEET UG application to meet NTA requirements.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 10, "max": 200, "unit": "KB" }
+      },
+      "guidelines": [
+        "Recent passport-size color photograph on white background",
+        "80% of face (including ears) should be visible",
+        "Neutral expression, looking directly at camera",
+        "Candidate's name and date should be printed at bottom",
+        "No caps, goggles, or masks",
+        "Both passport size and postcard size photos needed"
+      ],
+      "source": {
+        "url": "https://neet.nta.nic.in",
+        "document": "NTA NEET UG Information Bulletin",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "Both passport size (2.5cm × 3.5cm) and postcard size (4\" × 6\") photographs may be required.",
+      "slug": "neet-photo-resizer",
+      "relatedPresets": ["neet-signature"]
+    },
+    {
+      "id": "neet-signature",
+      "exam": "NEET UG",
+      "organization": "National Testing Agency",
+      "type": "signature",
+      "displayName": "NEET Signature Resizer",
+      "description": "Compress your signature for NEET UG application to meet the 4–30 KB requirement.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 4, "max": 30, "unit": "KB" }
+      },
+      "guidelines": [
+        "Sign on plain white paper using black ink pen",
+        "Use running handwriting — do not use capital letters",
+        "Signature should be clear and legible"
+      ],
+      "source": {
+        "url": "https://neet.nta.nic.in",
+        "document": "NTA NEET UG Information Bulletin",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": null,
+      "slug": "neet-signature-resizer",
+      "relatedPresets": ["neet-photo"]
+    },
+    {
+      "id": "jee-photo",
+      "exam": "JEE Main",
+      "organization": "National Testing Agency",
+      "type": "photo",
+      "displayName": "JEE Main Photo Resizer",
+      "description": "Resize and compress your photo for JEE Main application to meet NTA requirements.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 10, "max": 200, "unit": "KB" }
+      },
+      "guidelines": [
+        "Recent color photograph on plain white background",
+        "Face should cover at least 80% of the photograph",
+        "Both ears clearly visible",
+        "No polaroid, computer-generated, or filtered photos",
+        "Spectacles allowed if used regularly"
+      ],
+      "source": {
+        "url": "https://jeemain.nta.nic.in",
+        "document": "NTA JEE Main Information Bulletin",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "Dimensions approximately 3.5 cm × 4.5 cm.",
+      "slug": "jee-photo-resizer",
+      "relatedPresets": ["jee-signature"]
+    },
+    {
+      "id": "jee-signature",
+      "exam": "JEE Main",
+      "organization": "National Testing Agency",
+      "type": "signature",
+      "displayName": "JEE Main Signature Resizer",
+      "description": "Compress your signature for JEE Main application to meet the 10–100 KB requirement.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 10, "max": 100, "unit": "KB" }
+      },
+      "guidelines": [
+        "Sign on plain white paper using black or blue ballpoint pen",
+        "Use running handwriting — do not use capital letters",
+        "Signature should be clear and legible",
+        "Approximate dimensions: 3.5 cm × 1.5 cm"
+      ],
+      "source": {
+        "url": "https://jeemain.nta.nic.in",
+        "document": "NTA JEE Main Information Bulletin",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": null,
+      "slug": "jee-signature-resizer",
+      "relatedPresets": ["jee-photo"]
+    },
+    {
+      "id": "rrb-photo",
+      "exam": "RRB (Railway)",
+      "organization": "Railway Recruitment Boards",
+      "type": "photo",
+      "displayName": "RRB Photo Resizer",
+      "description": "Resize and compress your photo for Railway Recruitment Board applications.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 20, "max": 100, "unit": "KB" }
+      },
+      "guidelines": [
+        "Recent passport-size color photograph on white background",
+        "Both ears clearly visible, neutral expression",
+        "No caps, hats, or dark glasses",
+        "Photo should be clear and well-lit"
+      ],
+      "source": {
+        "url": "https://indianrailways.gov.in",
+        "document": "RRB CEN Notification",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "Requirements vary by CEN (Centralized Employment Notice). Some recent recruitments use live photo capture. Always check the specific notification.",
+      "slug": "rrb-photo-resizer",
+      "relatedPresets": ["rrb-signature"]
+    },
+    {
+      "id": "rrb-signature",
+      "exam": "RRB (Railway)",
+      "organization": "Railway Recruitment Boards",
+      "type": "signature",
+      "displayName": "RRB Signature Resizer",
+      "description": "Compress your signature for Railway Recruitment Board applications.",
+      "requirements": {
+        "format": ["jpg", "jpeg"],
+        "dimensions": {
+          "width": null,
+          "height": null,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "aspectRatio": null
+        },
+        "fileSize": { "min": 10, "max": 50, "unit": "KB" }
+      },
+      "guidelines": [
+        "Sign on plain white paper using black or dark blue ink",
+        "Running handwriting (cursive/joined letters) is mandatory",
+        "Do NOT sign in BLOCK or CAPITAL letters",
+        "Signature should be clear and not smudged"
+      ],
+      "source": {
+        "url": "https://indianrailways.gov.in",
+        "document": "RRB CEN Notification",
+        "verifiedDate": "2026-08-09",
+        "notificationYear": "2026",
+        "status": "needs-verification"
+      },
+      "notes": "Requirements vary by specific CEN.",
+      "slug": "rrb-signature-resizer",
+      "relatedPresets": ["rrb-photo"]
+    }
+  ],
+  "compressionTargets": [
+    {
+      "targetKB": 20,
+      "slug": "compress-image-to-20kb",
+      "title": "Compress Image to ≤ 20 KB",
+      "description": "Compress your image to 20 KB or less for exam application uploads. Free, instant, processed in your browser.",
+      "commonUses": ["SSC signature", "IBPS signature"],
+      "searchDemand": "verified"
+    },
+    {
+      "targetKB": 50,
+      "slug": "compress-image-to-50kb",
+      "title": "Compress Image to ≤ 50 KB",
+      "description": "Compress your image to 50 KB or less for exam and government application uploads. Free, instant, in your browser.",
+      "commonUses": ["SSC photo", "IBPS photo"],
+      "searchDemand": "verified"
+    },
+    {
+      "targetKB": 100,
+      "slug": "compress-image-to-100kb",
+      "title": "Compress Image to ≤ 100 KB",
+      "description": "Compress your image to 100 KB or less. Free online image compressor — files never leave your browser.",
+      "commonUses": ["UPSC signature", "JEE signature", "RRB photo"],
+      "searchDemand": "verified"
+    },
+    {
+      "targetKB": 200,
+      "slug": "compress-image-to-200kb",
+      "title": "Compress Image to ≤ 200 KB",
+      "description": "Compress your image to 200 KB or less. Free online image compressor — processed entirely in your browser.",
+      "commonUses": ["UPSC photo", "NEET photo", "JEE photo"],
+      "searchDemand": "verified"
+    }
+  ]
+}
