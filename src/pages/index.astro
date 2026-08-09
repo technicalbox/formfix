@@ -19,6 +19,12 @@ const compressionTargets = presetData.compressionTargets;
 
 const tools = [
   {
+    title: 'Check My Image',
+    description: 'Diagnose file compliance against exam requirements & auto-fix failures.',
+    href: '/check-image',
+    icon: 'check',
+  },
+  {
     title: 'Resize Image',
     description: 'Resize to exact pixel dimensions required by application portals.',
     href: '/tools/resize',
@@ -93,13 +99,12 @@ const faqs = [
       </p>
 
       <div class="hero-actions">
-        <a href="/tools/compress" class="btn btn-primary btn-lg">
+        <a href="/check-image" class="btn btn-primary btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="17 8 12 3 7 8"/>
-            <line x1="12" y1="3" x2="12" y2="15"/>
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
           </svg>
-          Upload & Fix
+          Check & Fix My Image
         </a>
         <a href="#exam-presets" class="btn btn-secondary btn-lg">
           Choose Exam Preset
@@ -124,6 +129,12 @@ const faqs = [
         {tools.map((tool) => (
           <a href={tool.href} class="card card-interactive tool-card">
             <div class="tool-icon" data-icon={tool.icon}>
+              {tool.icon === 'check' && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              )}
               {tool.icon === 'resize' && (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="15 3 21 3 21 9"/>
