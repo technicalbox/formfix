@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = 'Contact Us — FormFix';
+const pageDescription = 'Get in touch with FormFix for bug reports, outdated exam requirement reports, feedback, or privacy inquiries.';
+const contactEmail = 'contact@formfix.me';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="section">
+    <div class="container content-container">
+      <div class="tool-header">
+        <h1>Contact Us</h1>
+        <p class="lead-text">Have a question, feedback, or noticed an outdated exam requirement? We'd love to hear from you.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>How to Reach Us</h2>
+        <p>You can contact the FormFix team directly via email at:</p>
+        
+        <div class="email-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <a href={`mailto:${contactEmail}`} class="email-link">{contactEmail}</a>
+        </div>
+      </div>
+
+      <div class="card content-card">
+        <h2>What You Can Contact Us For</h2>
+        <div class="contact-reasons">
+          <div class="reason-item">
+            <h3>🐛 Bug Reports</h3>
+            <p>If an image fails to process, or a tool button doesn't respond on your device or browser version.</p>
+          </div>
+          <div class="reason-item">
+            <h3>📋 Outdated Exam Requirements</h3>
+            <p>If an official exam notification has changed photo/signature dimensions or file size limits, let us know so we can update the preset immediately.</p>
+          </div>
+          <div class="reason-item">
+            <h3>🔒 Privacy Inquiries</h3>
+            <p>Questions regarding our client-side processing architecture or privacy policies.</p>
+          </div>
+          <div class="reason-item">
+            <h3>💡 General Feedback</h3>
+            <p>Suggestions for new exam presets, compression targets, or user interface improvements.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card content-card">
+        <h2>Response Time</h2>
+        <p>We review all incoming messages and aim to respond to bug reports and requirement correction requests within 24 to 48 hours.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .content-container {
+    max-width: 768px;
+    margin-inline: auto;
+  }
+
+  .lead-text {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-top: var(--space-2);
+  }
+
+  .content-card {
+    margin-top: var(--space-6);
+    padding: clamp(1.25rem, 3.5vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .content-card h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .content-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: none;
+  }
+
+  .email-box {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-primary-50);
+    border: 1px solid var(--color-primary-100);
+    border-radius: var(--radius-md);
+    color: var(--color-primary-700);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    width: fit-content;
+    margin-top: var(--space-1);
+  }
+
+  .email-link {
+    color: var(--color-primary-700);
+    text-decoration: none;
+  }
+
+  .email-link:hover {
+    text-decoration: underline;
+  }
+
+  .contact-reasons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  .reason-item {
+    padding: var(--space-3-5);
+    background-color: var(--color-surface-muted);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .reason-item h3 {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--space-1);
+  }
+
+  .reason-item p {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+  }
+</style>

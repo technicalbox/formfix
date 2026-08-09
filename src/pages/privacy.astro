@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = 'Privacy Policy — FormFix';
+const pageDescription = 'FormFix Privacy Policy. Learn how your files and data are processed with 100% browser-local execution.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="section">
+    <div class="container content-container">
+      <div class="tool-header">
+        <h1>Privacy Policy</h1>
+        <p class="lead-text">Last updated: February 2026. This policy explains how FormFix handles user privacy and local file processing.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>1. Information Processed by FormFix</h2>
+        <p>FormFix is designed as a client-side utility. When you select, upload, or drag-and-drop a photo, signature, or document into FormFix, all image manipulation tasks (resizing, cropping, compression, format conversion, and validation) are executed entirely on your device using your browser's native JavaScript processor and HTML5 Canvas API.</p>
+        <p>Your uploaded files <strong>are not transferred to any remote server or cloud storage</strong> operated by FormFix. FormFix does not maintain a server-side file upload pipeline.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>2. Local Browser Processing & Storage</h2>
+        <p>Selected images exist temporarily in your web browser's volatile memory (RAM) while you adjust settings or perform edits. Once you click download or close the page, the processed file is downloaded directly to your device's local storage.</p>
+        <p>FormFix does not save your images to persistent browser storage (`localStorage` or `IndexedDB`) unless explicitly required for temporary workspace state.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>3. Personal Information</h2>
+        <p>FormFix does not require user registration, account creation, or login. We do not collect names, email addresses, phone numbers, or government identification details when you use the tool.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>4. Cookies & Web Storage</h2>
+        <p>FormFix does not set first-party cookies for file processing or user tracking. Essential web infrastructure providers (such as hosting and CDN services) may set standard HTTP headers for connection reliability, routing, and DDoS prevention.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>5. Advertising & Third-Party Disclosures</h2>
+        <p>Live third-party advertising scripts (such as Google AdSense) are <strong>not currently active</strong> on FormFix. FormFix may introduce third-party display advertising in the future to support website maintenance.</p>
+        <p>When third-party advertising is enabled, this Privacy Policy will be updated to include all required disclosures regarding third-party ad networks, vendor cookies, and ad-personalization choices.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>6. Third-Party Hosting Services</h2>
+        <p>FormFix is hosted on Vercel's global web infrastructure. Vercel collects standard server logs (such as IP addresses, user agent strings, and request timestamps) to maintain server health, security, and bandwidth analytics. For details, refer to Vercel's Privacy Policy.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>7. Data Security</h2>
+        <p>Because your files remain entirely on your own device and are never sent across the internet to our servers, risks associated with server data breaches or interception during file transfer are inherently eliminated.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>8. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in functionality, hosting infrastructure, or legal requirements. Updates will be posted on this page with a revised "Last updated" date.</p>
+      </div>
+
+      <div class="card content-card">
+        <h2>9. Contact Us</h2>
+        <p>If you have questions about this Privacy Policy, please contact us via our <a href="/contact">Contact Page</a> or by email at <a href="mailto:contact@formfix.me">contact@formfix.me</a>.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .content-container {
+    max-width: 768px;
+    margin-inline: auto;
+  }
+
+  .lead-text {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-top: var(--space-2);
+  }
+
+  .content-card {
+    margin-top: var(--space-6);
+    padding: clamp(1.25rem, 3.5vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .content-card h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .content-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: none;
+  }
+</style>
